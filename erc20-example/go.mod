@@ -1,4 +1,4 @@
-module github.com/your-username/go-practices/erc20-example
+module github.com/hlibbc/go-practices/erc20-example
 
 go 1.22.2
 
