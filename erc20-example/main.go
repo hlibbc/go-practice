@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"crypto/ecdsa"
 	"fmt"
 	"log"
@@ -12,9 +11,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/hlibbc/go-practices/erc20-example/token"
 	"github.com/joho/godotenv"
-
-	"erc20-example/token"
 )
 
 func init() {
@@ -61,7 +59,7 @@ func main() {
 
 	// 4. 컨트랙트 배포
 	initialSupply := new(big.Int).Mul(big.NewInt(1000), big.NewInt(1e18))
-	address, tx, instance, err := token.DeployMyToken(auth, client, initialSupply)
+	address, tx, instance, err := token.DeployToken(auth, client, initialSupply)
 	if err != nil {
 		log.Fatalf("❌ 컨트랙트 배포 실패: %v", err)
 	}
@@ -84,7 +82,7 @@ func main() {
 }
 
 // balanceOf() 호출 및 출력
-func printBalance(name string, contract *token.MyToken, addr common.Address) {
+func printBalance(name string, contract *token.Token, addr common.Address) {
 	bal, err := contract.BalanceOf(&bind.CallOpts{}, addr)
 	if err != nil {
 		log.Fatalf("❌ %s 잔액 조회 실패: %v", name, err)
