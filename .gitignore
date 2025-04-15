@@ -21,5 +21,8 @@
 go.work
 go.work.sum
 
+# Node modules (for solc-select, ganache, etc.)
+node_modules/
+
 # env file
 .env
